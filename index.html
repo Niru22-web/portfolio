@@ -148,6 +148,7 @@
     position:absolute;z-index:1;
     filter:drop-shadow(4px 4px 0 rgba(36,30,78,0.15));
     animation:float 6s ease-in-out infinite;
+    pointer-events:none;
   }
   .sticker svg{width:100%;height:100%;display:block;}
   .st-star{width:110px;top:70px;right:12%;animation-delay:0s;}
@@ -159,6 +160,12 @@
   @keyframes float{
     0%,100%{transform:translateY(0) rotate(-3deg);}
     50%{transform:translateY(-16px) rotate(3deg);}
+  }
+
+  /* Three.js hero canvas */
+  #hero3d{
+    position:absolute;inset:0;width:100%;height:100%;
+    z-index:0;display:block;touch-action:pan-y;
   }
 
   /* ---------- Marquee ---------- */
@@ -335,6 +342,7 @@
     .st-star{width:72px;right:6%;}
     .st-smiley{width:60px;right:5%;}
     .st-flower{width:70px;}
+    #hero3d{opacity:.55;}
   }
   @media (max-width:640px){
     .nav-links a:not(.btn-cta){display:none;}
@@ -369,6 +377,7 @@
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
+  <canvas id="hero3d" aria-hidden="true"></canvas>
   <!-- sticker: smiling star -->
   <div class="sticker st-star" aria-hidden="true">
     <svg viewBox="0 0 100 100"><path d="M50 6 L61 35 L93 38 L68 58 L76 90 L50 72 L24 90 L32 58 L7 38 L39 35 Z" fill="#FFC93C" stroke="#241E4E" stroke-width="5" stroke-linejoin="round"/><circle cx="42" cy="48" r="3.5" fill="#241E4E"/><circle cx="58" cy="48" r="3.5" fill="#241E4E"/><path d="M42 58 Q50 66 58 58" fill="none" stroke="#241E4E" stroke-width="4" stroke-linecap="round"/></svg>
@@ -707,6 +716,168 @@
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+
+const heroCanvas = document.getElementById('hero3d');
+if (heroCanvas) {
+  try {
+    const hero = heroCanvas.parentElement;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const renderer = new THREE.WebGLRenderer({ canvas: heroCanvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 0);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+    camera.position.set(0, 0, 11);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+    const sun = new THREE.DirectionalLight(0xffffff, 0.75);
+    sun.position.set(5, 7, 6);
+    scene.add(sun);
+
+    const edgeMat = new THREE.LineBasicMaterial({ color: 0x241E4E });
+
+    const specs = [
+      [new THREE.TorusGeometry(1, 0.42, 12, 26),        0xFF5E5B,  4.7,  2.3, -2.0, 1.05],
+      [new THREE.IcosahedronGeometry(0.95, 0),          0xFFC93C, -5.6,  2.7, -3.0, 1.00],
+      [new THREE.ConeGeometry(0.85, 1.55, 12),          0x3FC1C9,  5.7, -1.9, -1.2, 1.00],
+      [new THREE.BoxGeometry(1.25, 1.25, 1.25),         0xA78BFA, -4.9, -2.5, -2.2, 1.00],
+      [new THREE.TorusKnotGeometry(0.62, 0.25, 64, 10), 0xFF8FAB,  3.5, -3.0,  0.2, 0.95],
+      [new THREE.CapsuleGeometry(0.5, 0.75, 6, 12),     0xFFC93C,  6.4,  0.7, -4.0, 0.90],
+      [new THREE.TorusGeometry(0.72, 0.3, 10, 20),      0x3FC1C9, -6.6,  0.5, -4.2, 0.90],
+      [new THREE.IcosahedronGeometry(0.68, 0),          0xFF5E5B,  2.7,  3.2, -4.4, 0.85],
+      [new THREE.ConeGeometry(0.62, 1.15, 10),          0xFF8FAB, -3.0,  3.1, -5.0, 0.80],
+      [new THREE.BoxGeometry(0.95, 0.95, 0.95),         0xFFC93C,  0.7, -3.3, -5.2, 0.80]
+    ];
+
+    const shapes = specs.map(([geo, color, x, y, z, s]) => {
+      const mesh = new THREE.Mesh(geo, new THREE.MeshToonMaterial({ color }));
+      mesh.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo, 15), edgeMat));
+      mesh.position.set(x, y, z);
+      mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+      mesh.scale.setScalar(s);
+      mesh.userData = {
+        bx: x, by: y, bz: z, baseScale: s, xNow: x,
+        phase: Math.random() * Math.PI * 2,
+        bob: 0.55 + Math.random() * 0.5,
+        spinX: (Math.random() - 0.5) * 0.012,
+        spinY: (Math.random() - 0.5) * 0.012,
+        spinZ: (Math.random() - 0.5) * 0.008,
+        jump: 0, vy: 0, boost: 1
+      };
+      scene.add(mesh);
+      return mesh;
+    });
+
+    let sizeFactor = 1;
+    function resize() {
+      const w = hero.clientWidth, h = hero.clientHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      const aspect = w / h;
+      const xf = Math.min(Math.max(aspect / 1.7, 0.35), 1);
+      const small = aspect < 0.85;
+      sizeFactor = small ? 0.78 : 1;
+      shapes.forEach((m, i) => {
+        m.visible = !(small && i > 5);
+        m.userData.xNow = m.userData.bx * xf;
+      });
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    if (!reducedMotion) {
+      const raycaster = new THREE.Raycaster();
+      const pointer = new THREE.Vector2(0, 0);
+      let pointerActive = false;
+      let hovered = null;
+
+      const setPointer = (e) => {
+        const r = hero.getBoundingClientRect();
+        pointer.x = ((e.clientX - r.left) / r.width) * 2 - 1;
+        pointer.y = -((e.clientY - r.top) / r.height) * 2 + 1;
+      };
+
+      hero.addEventListener('pointermove', (e) => {
+        setPointer(e);
+        pointerActive = e.clientY >= hero.getBoundingClientRect().top &&
+                        e.clientY <= hero.getBoundingClientRect().bottom;
+      });
+      hero.addEventListener('pointerleave', () => { pointerActive = false; });
+
+      heroCanvas.addEventListener('pointerdown', (e) => {
+        setPointer(e);
+        raycaster.setFromCamera(pointer, camera);
+        const hit = raycaster.intersectObjects(shapes.filter(m => m.visible), false)[0];
+        if (hit) {
+          hit.object.userData.vy = 0.09;
+          hit.object.userData.boost = 7;
+        }
+      });
+
+      const clock = new THREE.Clock();
+      const visible = () => shapes.filter(m => m.visible);
+
+      function frame() {
+        const k = Math.min(clock.getDelta() * 60, 3);
+        const t = clock.elapsedTime;
+
+        if (pointerActive) {
+          raycaster.setFromCamera(pointer, camera);
+          const hit = raycaster.intersectObjects(visible(), false)[0];
+          hovered = hit ? hit.object : null;
+          heroCanvas.style.cursor = hovered ? 'pointer' : 'default';
+        } else {
+          hovered = null;
+        }
+
+        for (const m of visible()) {
+          const d = m.userData;
+          d.vy -= 0.0058 * k;
+          d.jump = Math.max(0, d.jump + d.vy * k);
+          if (d.jump === 0 && d.vy < 0) d.vy = 0;
+          d.boost += (1 - d.boost) * 0.05 * k;
+          m.rotation.x += d.spinX * d.boost * k;
+          m.rotation.y += d.spinY * d.boost * k;
+          m.rotation.z += d.spinZ * d.boost * k;
+          m.position.set(
+            d.xNow,
+            d.by + Math.sin(t * d.bob + d.phase) * 0.22 + d.jump,
+            d.bz
+          );
+          const target = d.baseScale * sizeFactor * (m === hovered ? 1.2 : 1);
+          m.scale.lerp(new THREE.Vector3(target, target, target), 0.12 * k);
+        }
+
+        camera.position.x += ((pointerActive ? pointer.x * 0.55 : 0) - camera.position.x) * 0.05 * k;
+        camera.position.y += ((pointerActive ? pointer.y * 0.35 : 0) - camera.position.y) * 0.05 * k;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    } else {
+      renderer.render(scene, camera);
+      window.addEventListener('resize', () => renderer.render(scene, camera));
+    }
+  } catch (err) {
+    heroCanvas.style.display = 'none';
+  }
+}
 </script>
 
 </body>
