@@ -248,21 +248,8 @@
   }
   .about .sec-head h2{color:var(--cream);}
   .about .sec-tag{background:var(--yellow);}
-  .about-grid{display:grid;grid-template-columns:340px 1fr;gap:56px;align-items:center;}
-  .char-card{
-    background:var(--white);
-    border:var(--border);border-radius:26px;
-    padding:18px;box-shadow:10px 10px 0 var(--yellow);
-    transform:rotate(-3deg);
-    transition:transform .25s ease;
-  }
-  .char-card:hover{transform:rotate(-1deg) translateY(-4px);}
-  .char-card img{border-radius:16px;}
-  .char-card figcaption{
-    font-family:var(--font-hand);font-size:1.3rem;text-align:center;
-    margin-top:12px;color:var(--ink);
-  }
-  .about-text{font-size:1.12rem;}
+  .about-grid{display:grid;grid-template-columns:1fr;gap:0;}
+  .about-text{font-size:1.12rem;max-width:760px;}
   .about-text p+p{margin-top:18px;}
   .about-text .hl-y{background:linear-gradient(transparent 60%, var(--yellow) 60%);font-weight:700;color:var(--cream);}
   .about-text .hl-t{background:linear-gradient(transparent 60%, var(--teal) 60%);font-weight:700;color:var(--cream);}
@@ -630,10 +617,6 @@
       <h2>Nice to meet you!</h2>
     </div>
     <div class="about-grid">
-      <figure class="char-card reveal">
-        <img src="developer.png" alt="Illustration of Niranjan working at his desk" width="640" height="640">
-        <figcaption>this is me, probably automating something</figcaption>
-      </figure>
       <div class="about-text reveal">
         <p>I'm a <span class="hl-y">Data Analytics &amp; Automation Specialist</span> who believes the best work is the work you never have to do twice — I build the systems that make sure of it.</p>
         <p>I create intelligent automation solutions, enterprise web portals, Excel tools, and dashboards that have saved <span class="hl-t">1,000+ hours of manual work</span> a year — and crunched 1M+ ledger records in under 3 minutes.</p>
