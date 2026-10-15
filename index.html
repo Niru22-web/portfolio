@@ -7,41 +7,59 @@
 <meta name="description" content="Portfolio of Niranjan Mulam — building intelligent automation, enterprise applications, and analytics systems that save thousands of hours of manual work.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --cream:#FFF6EC;
-    --ink:#241E4E;
-    --ink-soft:#4A4470;
-    --coral:#FF5E5B;
-    --yellow:#FFC93C;
-    --teal:#3FC1C9;
-    --lilac:#A78BFA;
-    --pink:#FF8FAB;
-    --white:#FFFFFF;
-    --radius:22px;
-    --border:3px solid var(--ink);
-    --shadow:6px 6px 0 var(--ink);
-    --font-display:"Bricolage Grotesque", sans-serif;
-    --font-body:"DM Sans", sans-serif;
-    --font-hand:"Caveat", cursive;
+    --bg:#05070F;
+    --bg-2:#0B111F;
+    --panel:#0E1526;
+    --panel-2:#121A2E;
+    --line:rgba(0,229,255,.16);
+    --line-faint:rgba(0,229,255,.05);
+    --cyan:#00E5FF;
+    --violet:#8B5CF6;
+    --magenta:#F471B5;
+    --lime:#A3E635;
+    --text:#E8F1FF;
+    --muted:#8A94AD;
+    --font-display:"Space Grotesk", sans-serif;
+    --font-mono:"JetBrains Mono", monospace;
   }
 
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
 
   body{
-    background:var(--cream);
-    color:var(--ink);
-    font-family:var(--font-body);
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-display);
     font-size:17px;
     line-height:1.65;
     overflow-x:hidden;
   }
+  body > *{position:relative;z-index:1;}
 
-  ::selection{background:var(--yellow);color:var(--ink);}
+  /* Animated data grid */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(var(--line-faint) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-faint) 1px, transparent 1px);
+    background-size:48px 48px;
+    animation:gridDrift 8s linear infinite;
+  }
+  /* Ambient glow orbs */
+  body::after{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(ellipse 60% 50% at 75% -10%, rgba(139,92,246,.16), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 8% 110%, rgba(0,229,255,.10), transparent 60%);
+  }
+  @keyframes gridDrift{to{background-position:48px 48px;}}
 
-  h1,h2,h3{font-family:var(--font-display);line-height:1.05;letter-spacing:-0.02em;}
+  ::selection{background:var(--cyan);color:var(--bg);}
+
+  h1,h2,h3{font-family:var(--font-display);line-height:1.08;letter-spacing:-0.02em;}
 
   a{color:inherit;text-decoration:none;}
   img{max-width:100%;display:block;}
@@ -51,277 +69,313 @@
   /* ---------- Nav ---------- */
   .nav{
     position:sticky;top:0;z-index:50;
-    background:rgba(255,246,236,0.92);
-    backdrop-filter:blur(8px);
-    border-bottom:var(--border);
+    background:rgba(5,7,15,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
   }
   .nav-inner{
     display:flex;align-items:center;justify-content:space-between;
     padding:16px 28px;max-width:1160px;margin:0 auto;
   }
   .logo{
-    font-family:var(--font-display);font-weight:800;font-size:1.5rem;
-    display:flex;align-items:center;gap:8px;
+    font-weight:700;font-size:1.3rem;letter-spacing:-0.01em;
+    display:flex;align-items:center;gap:12px;
   }
   .logo .mark{
-    width:40px;height:40px;background:var(--coral);border:var(--border);
-    border-radius:12px;display:grid;place-items:center;color:var(--white);
-    font-size:1.25rem;box-shadow:3px 3px 0 var(--ink);
-    transition:transform .25s ease;
+    width:40px;height:40px;
+    background:linear-gradient(135deg, var(--cyan), var(--violet));
+    border-radius:10px;display:grid;place-items:center;color:var(--bg);
+    font-family:var(--font-mono);font-weight:700;font-size:1.1rem;
+    box-shadow:0 0 18px rgba(0,229,255,.35);
   }
-  .logo:hover .mark{transform:rotate(-8deg) scale(1.06);}
-  .nav-links{display:flex;align-items:center;gap:12px;}
+  .logo .dot{color:var(--cyan);}
+  .nav-links{display:flex;align-items:center;gap:10px;}
   .nav-links a{
-    font-weight:700;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;
-    padding:9px 18px;border:var(--border);border-radius:999px;background:var(--white);
-    transition:transform .18s ease, box-shadow .18s ease;
-    box-shadow:3px 3px 0 var(--ink);
+    font-family:var(--font-mono);font-weight:500;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;
+    padding:9px 18px;border:1px solid transparent;border-radius:8px;color:var(--muted);
+    transition:color .18s ease, border-color .18s ease, box-shadow .18s ease;
   }
-  .nav-links a:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink);}
+  .nav-links a:hover{color:var(--cyan);border-color:var(--line);}
   .btn-cta{
-    background:var(--coral) !important;color:var(--white) !important;
-    display:inline-flex;align-items:center;gap:8px;
+    color:var(--bg) !important;
+    background:var(--cyan);
+    box-shadow:0 0 20px rgba(0,229,255,.3);
+    font-weight:700 !important;
   }
+  .btn-cta:hover{box-shadow:0 0 30px rgba(0,229,255,.55);border-color:transparent;}
 
   /* ---------- Hero ---------- */
-  .hero{
-    position:relative;
-    padding:88px 0 72px;
-    overflow:hidden;
-  }
+  .hero{padding:96px 0 80px;overflow:hidden;}
   .hero-grid{
-    position:relative;z-index:2;
-    display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;
+    display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;
   }
   .hero-text{max-width:640px;}
+
   .hero-kicker{
-    display:inline-block;font-family:var(--font-hand);font-size:1.45rem;
-    background:var(--white);border:var(--border);border-radius:999px;
-    padding:4px 20px;transform:rotate(-2deg);box-shadow:4px 4px 0 var(--ink);
-    margin-bottom:26px;
+    display:inline-block;font-family:var(--font-mono);font-size:.95rem;
+    color:var(--cyan);margin-bottom:26px;
   }
-  .hero h1{
-    font-size:clamp(2.9rem, 6.5vw, 5.6rem);
-    font-weight:800;
-    text-transform:uppercase;
+  .hero-kicker::before{content:"> ";}
+  .cursor{
+    display:inline-block;width:.55em;height:1.1em;background:var(--cyan);
+    vertical-align:text-bottom;margin-left:4px;
+    animation:blink 1.1s steps(1) infinite;
+    box-shadow:0 0 10px rgba(0,229,255,.7);
   }
-  .hero h1 .line{display:block;}
-  .hero h1 .l2{color:var(--coral);margin-left:.12em;}
-  .hero h1 .l3{
-    color:var(--teal);
-    background:linear-gradient(transparent 62%, var(--yellow) 62%);
-    width:fit-content;
-    padding-right:.1em;
+  @keyframes blink{50%{opacity:0;}}
+
+  .hero h1{text-transform:uppercase;}
+  .hero h1 .h-top{
+    display:block;font-size:clamp(1.4rem, 3vw, 2.2rem);font-weight:500;
+    color:var(--muted);letter-spacing:.14em;margin-bottom:6px;
   }
+  .hero h1 .grad{
+    display:block;
+    font-size:clamp(3.2rem, 8vw, 6.4rem);font-weight:700;letter-spacing:-0.03em;
+    background:linear-gradient(92deg, var(--cyan) 5%, var(--violet) 55%, var(--magenta) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 0 22px rgba(0,229,255,.25));
+  }
+
   .hero-sub{
-    margin-top:26px;font-size:1.2rem;color:var(--ink-soft);
-    max-width:560px;font-weight:500;
+    margin-top:26px;font-size:1.15rem;color:var(--muted);
+    max-width:560px;font-weight:400;
   }
-  .hero-sub .hl{
-    background:linear-gradient(transparent 60%, var(--pink) 60%);
-    font-weight:700;
-  }
+  .hero-sub .hl{color:var(--cyan);font-weight:600;}
+
   .hero-actions{margin-top:34px;display:flex;gap:16px;flex-wrap:wrap;}
   .btn{
     display:inline-flex;align-items:center;gap:10px;
-    font-family:var(--font-display);font-weight:700;font-size:1rem;
-    padding:15px 30px;border:var(--border);border-radius:999px;
-    box-shadow:5px 5px 0 var(--ink);
-    transition:transform .18s ease, box-shadow .18s ease;
-    cursor:pointer;
+    font-family:var(--font-mono);font-weight:600;font-size:.95rem;letter-spacing:.03em;
+    padding:14px 28px;border-radius:10px;cursor:pointer;
+    transition:box-shadow .18s ease, transform .18s ease, border-color .18s ease;
   }
-  .btn:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--ink);}
-  .btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink);}
-  .btn-primary{background:var(--coral);color:var(--white);}
-  .btn-ghost{background:var(--white);}
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{
+    background:var(--cyan);color:var(--bg);border:1px solid var(--cyan);
+    box-shadow:0 0 24px rgba(0,229,255,.3);
+  }
+  .btn-primary:hover{box-shadow:0 0 40px rgba(0,229,255,.55);}
+  .btn-ghost{
+    background:transparent;color:var(--cyan);border:1px solid var(--line);
+  }
+  .btn-ghost:hover{border-color:var(--cyan);box-shadow:0 0 18px rgba(0,229,255,.15);}
 
-  .hero-stats{margin-top:44px;display:flex;flex-wrap:wrap;gap:14px;}
+  /* Equalizer */
+  .eq{display:flex;gap:4px;align-items:flex-end;height:26px;margin-top:44px;}
+  .eq span{
+    width:5px;border-radius:2px;transform-origin:bottom;
+    background:linear-gradient(180deg, var(--cyan), var(--violet));
+    box-shadow:0 0 8px rgba(0,229,255,.4);
+    animation:eq 1.3s ease-in-out infinite;
+  }
+  .eq span:nth-child(1){height:45%;animation-delay:0s;}
+  .eq span:nth-child(2){height:90%;animation-delay:.15s;}
+  .eq span:nth-child(3){height:60%;animation-delay:.3s;}
+  .eq span:nth-child(4){height:100%;animation-delay:.45s;}
+  .eq span:nth-child(5){height:70%;animation-delay:.6s;}
+  .eq span:nth-child(6){height:85%;animation-delay:.75s;}
+  .eq span:nth-child(7){height:50%;animation-delay:.9s;}
+  @keyframes eq{0%,100%{transform:scaleY(.45);}50%{transform:scaleY(1);}}
+
+  .hero-stats{margin-top:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
   .stat-chip{
-    background:var(--white);border:var(--border);border-radius:18px;
-    padding:12px 22px;box-shadow:4px 4px 0 var(--ink);
-    display:flex;align-items:baseline;gap:8px;
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:16px 20px;
+    transition:border-color .18s ease, box-shadow .18s ease, transform .18s ease;
   }
-  .stat-chip:nth-child(odd){transform:rotate(-1.2deg);}
-  .stat-chip:nth-child(even){transform:rotate(1.2deg);}
-  .stat-chip:hover{transform:rotate(0) translateY(-3px);}
-  .stat-num{font-family:var(--font-display);font-weight:800;font-size:1.5rem;}
-  .stat-label{font-size:.85rem;font-weight:700;color:var(--ink-soft);}
-
-  /* Stickers */
-  .sticker{
-    position:absolute;z-index:1;
-    filter:drop-shadow(4px 4px 0 rgba(36,30,78,0.15));
-    animation:float 6s ease-in-out infinite;
-    pointer-events:none;
+  .stat-chip:hover{border-color:var(--cyan);box-shadow:0 0 20px rgba(0,229,255,.12);transform:translateY(-3px);}
+  .stat-num{
+    font-family:var(--font-mono);font-weight:700;font-size:1.55rem;color:var(--cyan);
+    text-shadow:0 0 14px rgba(0,229,255,.5);
   }
-  .sticker svg{width:100%;height:100%;display:block;}
-  .st-star{width:110px;top:44px;right:4%;animation-delay:0s;}
-  .st-flower{width:96px;bottom:56px;left:4%;animation-delay:1.2s;}
-  .st-squiggle{width:150px;top:110px;right:32%;animation-delay:2.1s;}
-  .st-smiley{width:84px;bottom:64px;right:2%;animation-delay:0.6s;}
-  .st-sun{width:70px;top:36px;left:34%;animation-delay:1.7s;}
+  .stat-chip:nth-child(2) .stat-num{color:var(--violet);text-shadow:0 0 14px rgba(139,92,246,.5);}
+  .stat-chip:nth-child(3) .stat-num{color:var(--magenta);text-shadow:0 0 14px rgba(244,113,181,.5);}
+  .stat-chip:nth-child(4) .stat-num{color:var(--lime);text-shadow:0 0 14px rgba(163,230,53,.5);}
+  .stat-label{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:4px;}
 
-  @keyframes float{
-    0%,100%{transform:translateY(0) rotate(-3deg);}
-    50%{transform:translateY(-16px) rotate(3deg);}
-  }
-
-  /* Hero character */
+  /* Hero character — hologram frame */
   .hero-art{position:relative;}
-  .hero-art img{
-    width:100%;max-width:540px;margin:0 auto;
-    transform:rotate(-2deg);
-    filter:drop-shadow(12px 12px 0 rgba(36,30,78,0.12));
+  .frame{
+    position:relative;
+    border:1px solid rgba(0,229,255,.3);border-radius:22px;
+    padding:18px;
+    background:rgba(14,21,38,.55);
+    backdrop-filter:blur(6px);
+    box-shadow:0 0 45px rgba(0,229,255,.10), inset 0 0 70px rgba(139,92,246,.08);
   }
+  .frame::before,.frame::after{content:"";position:absolute;width:28px;height:28px;}
+  .frame::before{top:-2px;left:-2px;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan);}
+  .frame::after{bottom:-2px;right:-2px;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan);}
+  .frame img{border-radius:12px;width:100%;}
+  .frame figcaption{
+    font-family:var(--font-mono);font-size:.8rem;color:var(--muted);
+    text-align:center;margin-top:14px;
+  }
+  .frame figcaption::before{content:"> ";color:var(--cyan);}
 
   /* ---------- Marquee ---------- */
   .marquee{
-    background:var(--yellow);
-    border-top:var(--border);border-bottom:var(--border);
-    overflow:hidden;
-    padding:16px 0;
-    transform:rotate(-1.2deg) scale(1.02);
-    margin:10px 0 0;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:rgba(11,17,31,.6);
+    overflow:hidden;padding:15px 0;
   }
   .marquee-track{
-    display:flex;gap:0;width:max-content;
-    animation:scroll 26s linear infinite;
+    display:flex;width:max-content;
+    animation:scroll 30s linear infinite;
   }
   .marquee span{
-    font-family:var(--font-display);font-weight:800;font-size:1.3rem;
-    text-transform:uppercase;letter-spacing:.08em;
+    font-family:var(--font-mono);font-weight:500;font-size:.95rem;
+    text-transform:uppercase;letter-spacing:.14em;color:var(--cyan);
     padding:0 26px;white-space:nowrap;display:flex;align-items:center;gap:26px;
   }
-  .marquee .dia{font-size:1rem;}
+  .marquee .dia{color:var(--violet);font-size:.8rem;}
   @keyframes scroll{to{transform:translateX(-50%);}}
 
   /* ---------- Sections ---------- */
   section{padding:96px 0;}
   .sec-head{margin-bottom:52px;}
   .sec-tag{
-    display:inline-block;font-family:var(--font-hand);font-size:1.35rem;
-    background:var(--teal);border:var(--border);border-radius:999px;
-    padding:3px 18px;transform:rotate(1.5deg);margin-bottom:14px;
-    box-shadow:3px 3px 0 var(--ink);color:var(--ink);
+    display:inline-block;font-family:var(--font-mono);font-size:.9rem;
+    color:var(--cyan);margin-bottom:14px;
   }
+  .sec-tag::before{content:"[ ";}
+  .sec-tag::after{content:" ]";}
   .sec-head h2{
-    font-size:clamp(2.2rem, 5vw, 3.4rem);font-weight:800;text-transform:uppercase;
+    font-size:clamp(2.2rem, 5vw, 3.4rem);font-weight:700;text-transform:uppercase;
   }
-  .sec-head h2 em{font-style:normal;color:var(--coral);}
-  .sec-head p{color:var(--ink-soft);max-width:560px;margin-top:12px;font-size:1.05rem;}
+  .sec-head h2 em{
+    font-style:normal;
+    background:linear-gradient(92deg, var(--cyan), var(--violet));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .sec-head p{color:var(--muted);max-width:580px;margin-top:12px;font-size:1.05rem;}
 
   /* ---------- Work ---------- */
   .work-grid{
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px;
   }
   .card{
-    background:var(--white);
-    border:var(--border);border-radius:var(--radius);
-    box-shadow:var(--shadow);
-    overflow:hidden;
-    transition:transform .22s ease, box-shadow .22s ease;
-    display:flex;flex-direction:column;
+    background:var(--panel);
+    border:1px solid var(--line);border-radius:16px;
+    overflow:hidden;display:flex;flex-direction:column;
+    transition:transform .22s ease, border-color .22s ease, box-shadow .22s ease;
   }
-  .card:hover{transform:translate(-4px,-4px) rotate(-0.5deg);box-shadow:10px 10px 0 var(--ink);}
-  .card-thumb{aspect-ratio:4/3;border-bottom:var(--border);position:relative;overflow:hidden;}
+  .card:hover{transform:translateY(-6px);border-color:rgba(0,229,255,.55);box-shadow:0 0 32px rgba(0,229,255,.14);}
+  .card-thumb{aspect-ratio:4/3;border-bottom:1px solid var(--line);position:relative;overflow:hidden;background:var(--bg-2);}
   .card-thumb svg{width:100%;height:100%;display:block;}
-  .card-body{padding:20px 22px 22px;display:flex;align-items:flex-end;justify-content:space-between;gap:14px;}
-  .card-title{font-family:var(--font-display);font-weight:700;font-size:1.25rem;}
-  .card-sub{font-size:.85rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px;}
-  .card-arrow{
-    flex:none;width:44px;height:44px;border-radius:50%;
-    border:var(--border);background:var(--white);
-    display:grid;place-items:center;font-size:1.15rem;
-    transition:transform .22s ease, background .22s ease, color .22s ease;
+  .card.c-violet .card-thumb svg{filter:drop-shadow(0 0 8px rgba(139,92,246,.3));}
+  .card.c-magenta .card-thumb svg{filter:drop-shadow(0 0 8px rgba(244,113,181,.3));}
+  .card.c-cyan .card-thumb svg{filter:drop-shadow(0 0 8px rgba(0,229,255,.3));}
+  .card.c-lime .card-thumb svg{filter:drop-shadow(0 0 8px rgba(163,230,53,.3));}
+  .card-body{padding:20px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;}
+  .card-title{font-weight:600;font-size:1.2rem;}
+  .card-sub{
+    font-family:var(--font-mono);font-size:.75rem;font-weight:500;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);margin-top:6px;
+    display:flex;align-items:center;gap:8px;
   }
-  .card:hover .card-arrow{transform:rotate(-45deg);}
-  .card:hover.coral .card-arrow{background:var(--coral);color:var(--white);}
-  .card:hover.teal .card-arrow{background:var(--teal);color:var(--white);}
-  .card:hover.lilac .card-arrow{background:var(--lilac);color:var(--white);}
-  .card:hover.yellow .card-arrow{background:var(--yellow);}
-  .card:hover.pink .card-arrow{background:var(--pink);color:var(--white);}
+  .dot{
+    width:7px;height:7px;border-radius:50%;background:var(--lime);
+    box-shadow:0 0 8px var(--lime);
+    animation:pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{50%{opacity:.35;}}
+  .card-arrow{
+    flex:none;width:42px;height:42px;border-radius:10px;
+    border:1px solid var(--line);color:var(--cyan);
+    display:grid;place-items:center;font-size:1.1rem;
+    transition:transform .22s ease, background .22s ease, color .22s ease, border-color .22s ease;
+  }
+  .card:hover .card-arrow{
+    transform:translate(2px,-2px);background:var(--cyan);color:var(--bg);border-color:var(--cyan);
+    box-shadow:0 0 16px rgba(0,229,255,.4);
+  }
 
   /* ---------- About ---------- */
   .about{
-    background:var(--ink);color:var(--cream);
-    border-top:var(--border);border-bottom:var(--border);
+    background:var(--bg-2);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
   }
-  .about .sec-head h2{color:var(--cream);}
-  .about .sec-tag{background:var(--yellow);}
   .about-grid{display:grid;grid-template-columns:1fr;gap:0;}
-  .about-text{font-size:1.12rem;max-width:760px;}
+  .about-text{font-size:1.12rem;max-width:760px;color:var(--text);}
   .about-text p+p{margin-top:18px;}
-  .about-text .hl-y{background:linear-gradient(transparent 60%, var(--yellow) 60%);font-weight:700;color:var(--cream);}
-  .about-text .hl-t{background:linear-gradient(transparent 60%, var(--teal) 60%);font-weight:700;color:var(--cream);}
-  .skill-pills{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;}
+  .about-text .glow-c{color:var(--cyan);font-weight:600;}
+  .about-text .glow-v{color:var(--violet);font-weight:600;}
+  .skill-pills{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;}
   .pill{
-    border:2.5px solid var(--cream);border-radius:999px;padding:8px 20px;
-    font-weight:700;font-size:.9rem;transition:all .18s ease;
+    font-family:var(--font-mono);font-size:.82rem;
+    border:1px solid var(--line);border-radius:8px;padding:8px 18px;color:var(--muted);
+    transition:all .18s ease;
   }
-  .pill:nth-child(odd){transform:rotate(-1.5deg);}
-  .pill:nth-child(even){transform:rotate(1.5deg);}
-  .pill:hover{background:var(--cream);color:var(--ink);transform:rotate(0) scale(1.05);}
+  .pill:nth-child(4n+1):hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 14px rgba(0,229,255,.15);}
+  .pill:nth-child(4n+2):hover{border-color:var(--violet);color:var(--violet);box-shadow:0 0 14px rgba(139,92,246,.15);}
+  .pill:nth-child(4n+3):hover{border-color:var(--magenta);color:var(--magenta);box-shadow:0 0 14px rgba(244,113,181,.15);}
+  .pill:nth-child(4n):hover{border-color:var(--lime);color:var(--lime);box-shadow:0 0 14px rgba(163,230,53,.15);}
 
   /* ---------- Services ---------- */
-  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:26px;}
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;}
   .service{
-    border:var(--border);border-radius:var(--radius);background:var(--white);
-    padding:30px 26px;box-shadow:var(--shadow);
-    transition:transform .22s ease;
+    border:1px solid var(--line);border-radius:16px;background:var(--panel);
+    padding:30px 26px;
+    transition:transform .22s ease, border-color .22s ease, box-shadow .22s ease;
   }
-  .service:hover{transform:translate(-3px,-3px);}
+  .service:hover{transform:translateY(-4px);border-color:rgba(0,229,255,.45);box-shadow:0 0 26px rgba(0,229,255,.1);}
   .service-ico{
-    width:58px;height:58px;border:var(--border);border-radius:16px;
-    display:grid;place-items:center;font-size:1.6rem;margin-bottom:18px;
-    box-shadow:3px 3px 0 var(--ink);
+    width:52px;height:52px;border-radius:12px;
+    display:grid;place-items:center;margin-bottom:18px;
+    border:1px solid var(--line);
   }
-  .service:nth-child(1) .service-ico{background:var(--coral);}
-  .service:nth-child(2) .service-ico{background:var(--yellow);}
-  .service:nth-child(3) .service-ico{background:var(--teal);}
-  .service:nth-child(4) .service-ico{background:var(--lilac);}
-  .service h3{font-size:1.25rem;font-weight:700;margin-bottom:8px;}
-  .service p{font-size:.95rem;color:var(--ink-soft);}
+  .service-ico svg{width:26px;height:26px;}
+  .service:nth-child(1) .service-ico svg{stroke:var(--cyan);filter:drop-shadow(0 0 6px rgba(0,229,255,.5));}
+  .service:nth-child(2) .service-ico svg{stroke:var(--violet);filter:drop-shadow(0 0 6px rgba(139,92,246,.5));}
+  .service:nth-child(3) .service-ico svg{stroke:var(--magenta);filter:drop-shadow(0 0 6px rgba(244,113,181,.5));}
+  .service:nth-child(4) .service-ico svg{stroke:var(--lime);filter:drop-shadow(0 0 6px rgba(163,230,53,.5));}
+  .service h3{font-size:1.2rem;font-weight:600;margin-bottom:8px;}
+  .service p{font-size:.95rem;color:var(--muted);}
 
   /* ---------- Contact ---------- */
   .contact{text-align:center;position:relative;overflow:hidden;}
   .contact-card{
-    border:var(--border);border-radius:36px;background:var(--white);
-    box-shadow:10px 10px 0 var(--ink);
-    padding:80px 30px;position:relative;overflow:hidden;
-  }
-  .contact-card::before{
-    content:"";position:absolute;inset:0;
+    border:1px solid var(--line);border-radius:28px;
     background:
-      radial-gradient(circle at 8% 12%, rgba(255,201,60,.35) 0 90px, transparent 90px),
-      radial-gradient(circle at 92% 85%, rgba(63,193,201,.3) 0 110px, transparent 110px),
-      radial-gradient(circle at 85% 10%, rgba(255,94,91,.25) 0 70px, transparent 70px),
-      radial-gradient(circle at 12% 90%, rgba(167,139,250,.3) 0 90px, transparent 90px);
-    pointer-events:none;
+      radial-gradient(ellipse 60% 70% at 50% 0%, rgba(139,92,246,.10), transparent 60%),
+      radial-gradient(ellipse 40% 50% at 85% 100%, rgba(0,229,255,.08), transparent 60%),
+      var(--panel);
+    box-shadow:0 0 60px rgba(0,229,255,.06);
+    padding:80px 30px;position:relative;
   }
+  .contact .sec-tag{color:var(--magenta);}
   .contact h2{
-    font-size:clamp(2.6rem,6vw,4.6rem);font-weight:800;text-transform:uppercase;
-    position:relative;
+    font-size:clamp(2.4rem,6vw,4.4rem);font-weight:700;text-transform:uppercase;
   }
-  .contact h2 .c1{color:var(--coral);}
-  .contact h2 .c2{color:var(--teal);}
-  .contact p{color:var(--ink-soft);max-width:480px;margin:20px auto 34px;position:relative;font-size:1.1rem;}
+  .contact h2 .c1{
+    background:linear-gradient(92deg, var(--cyan), var(--violet));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .contact h2 .c2{
+    background:linear-gradient(92deg, var(--magenta), var(--violet));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .contact p{color:var(--muted);max-width:480px;margin:20px auto 34px;font-size:1.08rem;}
 
   /* ---------- Footer ---------- */
   footer{
-    background:var(--ink);color:var(--cream);
-    border-top:var(--border);
+    background:var(--bg-2);
+    border-top:1px solid var(--line);
     padding:36px 0;
   }
   .foot-inner{
     display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
   }
-  .foot-links{display:flex;gap:22px;font-weight:700;font-size:.95rem;}
+  .foot-links{display:flex;gap:24px;font-family:var(--font-mono);font-size:.85rem;font-weight:500;}
   .foot-links a{
-    border-bottom:2.5px solid transparent;padding-bottom:2px;
-    transition:color .18s ease, border-color .18s ease;
+    color:var(--muted);
+    transition:color .18s ease, text-shadow .18s ease;
   }
-  .foot-links a:hover{color:var(--yellow);border-color:var(--yellow);}
-  .foot-note{font-family:var(--font-hand);font-size:1.25rem;color:var(--pink);}
+  .foot-links a:hover{color:var(--cyan);text-shadow:0 0 12px rgba(0,229,255,.5);}
+  .foot-note{font-family:var(--font-mono);font-size:.85rem;color:var(--muted);}
+  .foot-note::before{content:"// ";color:var(--violet);}
 
   /* ---------- Reveal on scroll ---------- */
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease, transform .6s ease;}
@@ -329,25 +383,23 @@
 
   /* ---------- Responsive ---------- */
   @media (max-width:820px){
-    .about-grid{grid-template-columns:1fr;justify-items:center;text-align:center;}
-    .skill-pills{justify-content:center;}
-    .st-squiggle,.st-sun{display:none;}
-    .st-star{width:72px;right:6%;}
-    .st-smiley{width:60px;right:5%;}
-    .st-flower{width:70px;}
-    .hero-grid{grid-template-columns:1fr;gap:40px;}
-    .hero-art img{max-width:400px;}
+    .hero-grid{grid-template-columns:1fr;gap:44px;}
+    .hero-art{max-width:420px;margin:0 auto;}
   }
   @media (max-width:640px){
     .nav-links a:not(.btn-cta){display:none;}
     section{padding:64px 0;}
     .hero{padding:64px 0 56px;}
-    .hero-art img{max-width:320px;}
+    .hero-art{max-width:330px;}
+    .hero-stats{grid-template-columns:repeat(2,1fr);}
   }
 
   @media (prefers-reduced-motion: reduce){
+    body::before{animation:none;}
     .marquee-track{animation:none;}
-    .sticker{animation:none;}
+    .eq span{animation:none;transform:scaleY(.8);}
+    .dot{animation:none;}
+    .cursor{animation:none;}
     .reveal{opacity:1;transform:none;transition:none;}
     html{scroll-behavior:auto;}
   }
@@ -360,7 +412,7 @@
   <div class="nav-inner">
     <a class="logo" href="#top" aria-label="Home">
       <span class="mark">N!</span>
-      <span>niranjan<span style="color:var(--coral)">.</span>mulam</span>
+      <span>niranjan<span class="dot">.</span>mulam</span>
     </a>
     <div class="nav-links">
       <a href="#work">Work</a>
@@ -372,61 +424,32 @@
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
-  <!-- sticker: smiling star -->
-  <div class="sticker st-star" aria-hidden="true">
-    <svg viewBox="0 0 100 100"><path d="M50 6 L61 35 L93 38 L68 58 L76 90 L50 72 L24 90 L32 58 L7 38 L39 35 Z" fill="#FFC93C" stroke="#241E4E" stroke-width="5" stroke-linejoin="round"/><circle cx="42" cy="48" r="3.5" fill="#241E4E"/><circle cx="58" cy="48" r="3.5" fill="#241E4E"/><path d="M42 58 Q50 66 58 58" fill="none" stroke="#241E4E" stroke-width="4" stroke-linecap="round"/></svg>
-  </div>
-  <!-- sticker: flower -->
-  <div class="sticker st-flower" aria-hidden="true">
-    <svg viewBox="0 0 100 100">
-      <g stroke="#241E4E" stroke-width="5">
-        <circle cx="50" cy="20" r="14" fill="#FF5E5B"/>
-        <circle cx="76" cy="40" r="14" fill="#FF5E5B"/>
-        <circle cx="66" cy="72" r="14" fill="#FF5E5B"/>
-        <circle cx="34" cy="72" r="14" fill="#FF5E5B"/>
-        <circle cx="24" cy="40" r="14" fill="#FF5E5B"/>
-        <circle cx="50" cy="48" r="16" fill="#FFC93C"/>
-      </g>
-      <circle cx="45" cy="45" r="2.6" fill="#241E4E"/><circle cx="55" cy="45" r="2.6" fill="#241E4E"/>
-      <path d="M44 53 Q50 58 56 53" fill="none" stroke="#241E4E" stroke-width="3.5" stroke-linecap="round"/>
-    </svg>
-  </div>
-  <!-- sticker: squiggle -->
-  <div class="sticker st-squiggle" aria-hidden="true">
-    <svg viewBox="0 0 160 60"><path d="M8 40 Q28 6 48 34 T88 34 T128 34 T152 22" fill="none" stroke="#3FC1C9" stroke-width="10" stroke-linecap="round"/></svg>
-  </div>
-  <!-- sticker: smiley -->
-  <div class="sticker st-smiley" aria-hidden="true">
-    <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="#A78BFA" stroke="#241E4E" stroke-width="5"/><circle cx="38" cy="42" r="4" fill="#241E4E"/><circle cx="62" cy="42" r="4" fill="#241E4E"/><path d="M35 60 Q50 74 65 60" fill="none" stroke="#241E4E" stroke-width="4.5" stroke-linecap="round"/></svg>
-  </div>
-  <!-- sticker: sun -->
-  <div class="sticker st-sun" aria-hidden="true">
-    <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="22" fill="#FF8FAB" stroke="#241E4E" stroke-width="5"/><g stroke="#241E4E" stroke-width="5" stroke-linecap="round"><line x1="50" y1="12" x2="50" y2="22"/><line x1="50" y1="78" x2="50" y2="88"/><line x1="12" y1="50" x2="22" y2="50"/><line x1="78" y1="50" x2="88" y2="50"/><line x1="24" y1="24" x2="31" y2="31"/><line x1="69" y1="69" x2="76" y2="76"/><line x1="76" y1="24" x2="69" y2="31"/><line x1="31" y1="69" x2="24" y2="76"/></g></svg>
-  </div>
-
   <div class="wrap">
     <div class="hero-grid">
       <div class="hero-text">
-        <span class="hero-kicker">hello there, welcome to my corner of the internet!</span>
+        <span class="hero-kicker">hello there, welcome to my corner of the internet<span class="cursor"></span></span>
         <h1>
-          <span class="line">Hi,</span>
-          <span class="line l2">I'm</span>
-          <span class="line l3">Niranjan</span>
+          <span class="h-top">Hi, I'm</span>
+          <span class="grad">Niranjan</span>
         </h1>
         <p class="hero-sub">Data Analytics &amp; Automation Specialist. I build <span class="hl">intelligent automation</span>, enterprise apps, and dashboards that erase busywork — saving teams 1,000+ hours a year.</p>
         <div class="hero-actions">
           <a href="#work" class="btn btn-primary">See my work ↓</a>
-          <a href="#contact" class="btn btn-ghost">Say hello 👋</a>
+          <a href="#contact" class="btn btn-ghost">Say hello →</a>
         </div>
+        <div class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
         <div class="hero-stats">
-          <div class="stat-chip"><span class="stat-num" style="color:var(--coral)">15+</span><span class="stat-label">projects shipped</span></div>
-          <div class="stat-chip"><span class="stat-num" style="color:var(--teal)">1M+</span><span class="stat-label">ledger records processed</span></div>
-          <div class="stat-chip"><span class="stat-num" style="color:var(--lilac)">1000+</span><span class="stat-label">hours automated yearly</span></div>
-          <div class="stat-chip"><span class="stat-num" style="color:var(--ink)">90%</span><span class="stat-label">faster audit cycles</span></div>
+          <div class="stat-chip"><div class="stat-num">15+</div><div class="stat-label">projects shipped</div></div>
+          <div class="stat-chip"><div class="stat-num">1M+</div><div class="stat-label">ledger records processed</div></div>
+          <div class="stat-chip"><div class="stat-num">1000+</div><div class="stat-label">hours automated yearly</div></div>
+          <div class="stat-chip"><div class="stat-num">90%</div><div class="stat-label">faster audit cycles</div></div>
         </div>
       </div>
       <div class="hero-art">
-        <img src="developer.png" alt="Illustration of Niranjan working at his desk" width="1024" height="1024">
+        <figure class="frame">
+          <img src="developer.png" alt="Illustration of Niranjan working at his desk" width="1024" height="1024">
+          <figcaption>probably_automating_something.exe</figcaption>
+        </figure>
       </div>
     </div>
   </div>
@@ -444,106 +467,105 @@
 <section id="work">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-tag">selected work</span>
+      <span class="sec-tag">selected_work</span>
       <h2>Things I've <em>automated</em></h2>
       <p>Real systems running in real companies — three of these are live in production right now. Each one erased busywork nobody misses.</p>
     </div>
 
     <div class="work-grid">
       <!-- Project 1: ASA Timesheet Management System (LIVE) -->
-      <a href="https://timesheet.asaind.co.in/login" target="_blank" rel="noopener" class="card lilac reveal">
+      <a href="https://timesheet.asaind.co.in/login" target="_blank" rel="noopener" class="card c-violet reveal">
         <div class="card-thumb">
           <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-            <rect width="400" height="300" fill="#A78BFA"/>
-            <circle cx="200" cy="140" r="76" fill="#FFF6EC" stroke="#241E4E" stroke-width="6"/>
-            <g stroke="#241E4E" stroke-width="5" stroke-linecap="round">
-              <line x1="200" y1="140" x2="200" y2="92"/>
-              <line x1="200" y1="140" x2="232" y2="158"/>
+            <rect width="400" height="300" fill="#0C0E20"/>
+            <circle cx="200" cy="140" r="76" fill="#12142E" stroke="#A78BFA" stroke-width="5"/>
+            <g stroke="#A78BFA" stroke-width="5" stroke-linecap="round">
+              <line x1="200" y1="140" x2="200" y2="94"/>
+              <line x1="200" y1="140" x2="230" y2="158"/>
             </g>
-            <circle cx="200" cy="140" r="10" fill="#FF5E5B" stroke="#241E4E" stroke-width="4"/>
-            <g stroke="#241E4E" stroke-width="6" stroke-linecap="round">
+            <circle cx="200" cy="140" r="9" fill="#00E5FF"/>
+            <g stroke="#8B5CF6" stroke-width="5" stroke-linecap="round">
               <line x1="200" y1="48" x2="200" y2="30"/><line x1="200" y1="250" x2="200" y2="232"/>
               <line x1="108" y1="140" x2="90" y2="140"/><line x1="310" y1="140" x2="292" y2="140"/>
             </g>
-            <rect x="76" y="228" width="110" height="40" rx="10" fill="#FFC93C" stroke="#241E4E" stroke-width="4"/>
-            <path d="M112 248 l10 10 -20 0 Z" fill="#241E4E"/>
-            <rect x="216" y="228" width="110" height="40" rx="10" fill="#3FC1C9" stroke="#241E4E" stroke-width="4"/>
-            <circle cx="271" cy="248" r="9" fill="#241E4E"/>
+            <rect x="76" y="228" width="110" height="40" rx="10" fill="none" stroke="#A3E635" stroke-width="4"/>
+            <path d="M112 248 l10 10 -20 0 Z" fill="#A3E635"/>
+            <rect x="216" y="228" width="110" height="40" rx="10" fill="none" stroke="#00E5FF" stroke-width="4"/>
+            <circle cx="271" cy="248" r="9" fill="#00E5FF"/>
           </svg>
         </div>
         <div class="card-body">
-          <div><div class="card-title">Timesheet Portal</div><div class="card-sub">Live · Enterprise HR System</div></div>
+          <div><div class="card-title">Timesheet Portal</div><div class="card-sub"><span class="dot"></span>Live · Enterprise HR System</div></div>
           <span class="card-arrow">→</span>
         </div>
       </a>
 
       <!-- Project 2: Meridian Finance (LIVE) -->
-      <a href="https://meridian-finance.vercel.app" target="_blank" rel="noopener" class="card pink reveal">
+      <a href="https://meridian-finance.vercel.app" target="_blank" rel="noopener" class="card c-magenta reveal">
         <div class="card-thumb">
           <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-            <rect width="400" height="300" fill="#FF8FAB"/>
-            <circle cx="150" cy="150" r="85" fill="#FFF6EC" stroke="#241E4E" stroke-width="6"/>
-            <ellipse cx="150" cy="150" rx="40" ry="85" fill="none" stroke="#241E4E" stroke-width="4"/>
-            <ellipse cx="150" cy="150" rx="74" ry="36" fill="none" stroke="#241E4E" stroke-width="4"/>
-            <line x1="65" y1="150" x2="235" y2="150" stroke="#241E4E" stroke-width="4"/>
-            <line x1="150" y1="65" x2="150" y2="235" stroke="#241E4E" stroke-width="4"/>
-            <g stroke="#241E4E" stroke-width="4">
-              <rect x="262" y="168" width="28" height="56" rx="5" fill="#3FC1C9"/>
-              <rect x="300" y="136" width="28" height="88" rx="5" fill="#FFC93C"/>
-              <rect x="338" y="104" width="28" height="120" rx="5" fill="#FF5E5B"/>
+            <rect width="400" height="300" fill="#150D22"/>
+            <circle cx="150" cy="150" r="85" fill="#1A1030" stroke="#F471B5" stroke-width="5"/>
+            <ellipse cx="150" cy="150" rx="40" ry="85" fill="none" stroke="#F471B5" stroke-width="3"/>
+            <ellipse cx="150" cy="150" rx="74" ry="36" fill="none" stroke="#F471B5" stroke-width="3"/>
+            <line x1="65" y1="150" x2="235" y2="150" stroke="#F471B5" stroke-width="3"/>
+            <line x1="150" y1="65" x2="150" y2="235" stroke="#F471B5" stroke-width="3"/>
+            <g fill="none" stroke-width="4">
+              <rect x="262" y="168" width="28" height="56" rx="5" stroke="#00E5FF"/>
+              <rect x="300" y="136" width="28" height="88" rx="5" stroke="#8B5CF6"/>
+              <rect x="338" y="104" width="28" height="120" rx="5" stroke="#F471B5"/>
             </g>
-            <path d="M268 128 L306 104 L344 76" fill="none" stroke="#241E4E" stroke-width="6" stroke-linecap="round"/>
-            <path d="M352 64 L338 70 L346 80 Z" fill="#241E4E"/>
-            <circle cx="70" cy="70" r="14" fill="#FFC93C" stroke="#241E4E" stroke-width="4"/>
-            <path d="M70 62 v16 M62 70 h16" stroke="#241E4E" stroke-width="4" stroke-linecap="round"/>
+            <path d="M268 128 L306 104 L344 76" fill="none" stroke="#E8F1FF" stroke-width="5" stroke-linecap="round"/>
+            <path d="M352 64 L338 70 L346 80 Z" fill="#E8F1FF"/>
+            <circle cx="70" cy="70" r="14" fill="none" stroke="#00E5FF" stroke-width="4"/>
+            <path d="M70 62 v16 M62 70 h16" stroke="#00E5FF" stroke-width="4" stroke-linecap="round"/>
           </svg>
         </div>
         <div class="card-body">
-          <div><div class="card-title">Meridian Finance</div><div class="card-sub">Live · Client Website</div></div>
+          <div><div class="card-title">Meridian Finance</div><div class="card-sub"><span class="dot"></span>Live · Client Website</div></div>
           <span class="card-arrow">→</span>
         </div>
       </a>
 
       <!-- Project 3: NVK Data Entry (LIVE) -->
-      <a href="https://nvk-data-entry.vercel.app" target="_blank" rel="noopener" class="card yellow reveal">
+      <a href="https://nvk-data-entry.vercel.app" target="_blank" rel="noopener" class="card c-cyan reveal">
         <div class="card-thumb">
           <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-            <rect width="400" height="300" fill="#FFC93C"/>
-            <rect x="66" y="44" width="268" height="212" rx="14" fill="#FFF6EC" stroke="#241E4E" stroke-width="5"/>
-            <rect x="66" y="44" width="268" height="36" rx="14" fill="#241E4E"/>
-            <rect x="66" y="60" width="268" height="20" fill="#241E4E"/>
-            <circle cx="90" cy="62" r="5" fill="#FF5E5B"/><circle cx="108" cy="62" r="5" fill="#FFC93C"/><circle cx="126" cy="62" r="5" fill="#3FC1C9"/>
-            <rect x="92" y="104" width="110" height="10" rx="5" fill="#D8D2E8"/>
-            <rect x="92" y="126" width="216" height="28" rx="8" fill="#FFFFFF" stroke="#241E4E" stroke-width="3.5"/>
-            <rect x="102" y="134" width="7" height="13" fill="#241E4E"/>
-            <rect x="92" y="172" width="110" height="10" rx="5" fill="#D8D2E8"/>
-            <rect x="92" y="194" width="216" height="28" rx="8" fill="#FFFFFF" stroke="#241E4E" stroke-width="3.5"/>
-            <rect x="102" y="202" width="80" height="9" rx="4.5" fill="#D8D2E8"/>
-            <rect x="242" y="194" width="66" height="28" rx="8" fill="#3FC1C9" stroke="#241E4E" stroke-width="3.5"/>
-            <path d="M275 201 v14 M268 208 h14" stroke="#241E4E" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <rect width="400" height="300" fill="#0A1424"/>
+            <rect x="66" y="44" width="268" height="212" rx="14" fill="#0D1830" stroke="#00E5FF" stroke-width="4"/>
+            <line x1="66" y1="80" x2="334" y2="80" stroke="#00E5FF" stroke-width="3"/>
+            <circle cx="90" cy="62" r="5" fill="#00E5FF"/><circle cx="108" cy="62" r="5" fill="#8B5CF6"/><circle cx="126" cy="62" r="5" fill="#F471B5"/>
+            <rect x="92" y="104" width="110" height="9" rx="4" fill="#2A3552"/>
+            <rect x="92" y="126" width="216" height="28" rx="7" fill="none" stroke="#3A4666" stroke-width="3"/>
+            <rect x="102" y="134" width="7" height="13" fill="#00E5FF"/>
+            <rect x="92" y="172" width="110" height="9" rx="4" fill="#2A3552"/>
+            <rect x="92" y="194" width="216" height="28" rx="7" fill="none" stroke="#3A4666" stroke-width="3"/>
+            <rect x="102" y="202" width="80" height="9" rx="4" fill="#2A3552"/>
+            <rect x="242" y="194" width="66" height="28" rx="7" fill="none" stroke="#00E5FF" stroke-width="3"/>
+            <path d="M275 201 v14 M268 208 h14" stroke="#00E5FF" stroke-width="4" fill="none" stroke-linecap="round"/>
           </svg>
         </div>
         <div class="card-body">
-          <div><div class="card-title">NVK Data Entry</div><div class="card-sub">Live · React Web App</div></div>
+          <div><div class="card-title">NVK Data Entry</div><div class="card-sub"><span class="dot"></span>Live · React Web App</div></div>
           <span class="card-arrow">→</span>
         </div>
       </a>
 
       <!-- Project 4: Billing Adjustments Automation -->
-      <a href="https://github.com/Niru22-web/Billing-Adjustments-LIVE" target="_blank" rel="noopener" class="card teal reveal">
+      <a href="https://github.com/Niru22-web/Billing-Adjustments-LIVE" target="_blank" rel="noopener" class="card c-lime reveal">
         <div class="card-thumb">
           <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-            <rect width="400" height="300" fill="#3FC1C9"/>
-            <path d="M128 44 h144 v186 l-16 -13 -16 13 -16 -13 -16 13 -16 -13 -16 13 -16 -13 -16 13 -16 -13 -16 13 -16 -13 -16 13 Z" fill="#FFF6EC" stroke="#241E4E" stroke-width="5" stroke-linejoin="round"/>
-            <rect x="156" y="72" width="56" height="13" rx="6.5" fill="#241E4E"/>
-            <line x1="156" y1="108" x2="244" y2="108" stroke="#241E4E" stroke-width="4" stroke-linecap="round"/>
-            <line x1="156" y1="132" x2="244" y2="132" stroke="#241E4E" stroke-width="4" stroke-linecap="round"/>
-            <line x1="156" y1="156" x2="212" y2="156" stroke="#241E4E" stroke-width="4" stroke-linecap="round"/>
-            <rect x="196" y="182" width="48" height="18" rx="5" fill="#FFC93C" stroke="#241E4E" stroke-width="3.5"/>
-            <circle cx="312" cy="112" r="30" fill="#FFC93C" stroke="#241E4E" stroke-width="5"/>
-            <path d="M298 112 l10 10 20 -20" fill="none" stroke="#241E4E" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M84 96 l5 12 12 5 -12 5 -5 12 -5 -12 -12 -5 12 -5 Z" fill="#FF8FAB" stroke="#241E4E" stroke-width="3" stroke-linejoin="round"/>
-            <circle cx="76" cy="216" r="16" fill="#A78BFA" stroke="#241E4E" stroke-width="4"/>
+            <rect width="400" height="300" fill="#0B1A1E"/>
+            <path d="M128 44 h144 v186 l-16 -13 -16 13 -16 -13 -16 13 -16 -13 -16 13 -16 -13 -16 13 -16 -13 -16 13 -16 -13 -16 13 Z" fill="#0F2429" stroke="#E8F1FF" stroke-width="4" stroke-linejoin="round"/>
+            <rect x="156" y="72" width="56" height="13" rx="6.5" fill="#A3E635"/>
+            <line x1="156" y1="108" x2="244" y2="108" stroke="#4A5573" stroke-width="4" stroke-linecap="round"/>
+            <line x1="156" y1="132" x2="244" y2="132" stroke="#4A5573" stroke-width="4" stroke-linecap="round"/>
+            <line x1="156" y1="156" x2="212" y2="156" stroke="#4A5573" stroke-width="4" stroke-linecap="round"/>
+            <rect x="196" y="182" width="48" height="18" rx="5" fill="none" stroke="#00E5FF" stroke-width="3"/>
+            <circle cx="312" cy="112" r="30" fill="none" stroke="#A3E635" stroke-width="5"/>
+            <path d="M298 112 l10 10 20 -20" fill="none" stroke="#A3E635" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M84 96 l5 12 12 5 -12 5 -5 12 -5 -12 -12 -5 12 -5 Z" fill="none" stroke="#F471B5" stroke-width="3" stroke-linejoin="round"/>
+            <circle cx="76" cy="216" r="16" fill="none" stroke="#8B5CF6" stroke-width="4"/>
           </svg>
         </div>
         <div class="card-body">
@@ -553,21 +575,21 @@
       </a>
 
       <!-- Project 5: GL Dump Automation (internal) -->
-      <a href="https://github.com/Niru22-web" target="_blank" rel="noopener" class="card teal reveal">
+      <a href="https://github.com/Niru22-web" target="_blank" rel="noopener" class="card c-cyan reveal">
         <div class="card-thumb">
           <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-            <rect width="400" height="300" fill="#3FC1C9"/>
-            <g stroke="#241E4E" stroke-width="5" stroke-linecap="round">
+            <rect width="400" height="300" fill="#0A1620"/>
+            <g stroke="#4A5573" stroke-width="5" stroke-linecap="round">
               <line x1="80" y1="90" x2="230" y2="90"/><line x1="80" y1="130" x2="200" y2="130"/>
               <line x1="80" y1="170" x2="240" y2="170"/><line x1="80" y1="210" x2="170" y2="210"/>
             </g>
-            <rect x="70" y="230" width="180" height="14" rx="7" fill="#FFC93C" stroke="#241E4E" stroke-width="4"/>
-            <circle cx="275" cy="150" r="52" fill="#FFF6EC" stroke="#241E4E" stroke-width="6"/>
-            <line x1="275" y1="150" x2="275" y2="112" stroke="#FF5E5B" stroke-width="6" stroke-linecap="round"/>
-            <line x1="275" y1="150" x2="303" y2="166" stroke="#241E4E" stroke-width="6" stroke-linecap="round"/>
-            <circle cx="275" cy="150" r="8" fill="#241E4E"/>
-            <line x1="312" y1="188" x2="340" y2="216" stroke="#241E4E" stroke-width="12" stroke-linecap="round"/>
-            <path d="M330 80 l6 14 14 6 -14 6 -6 14 -6 -14 -14 -6 14 -6 Z" fill="#FFC93C" stroke="#241E4E" stroke-width="3.5" stroke-linejoin="round"/>
+            <rect x="70" y="230" width="180" height="14" rx="7" fill="none" stroke="#00E5FF" stroke-width="4"/>
+            <circle cx="275" cy="150" r="52" fill="none" stroke="#00E5FF" stroke-width="5"/>
+            <line x1="275" y1="150" x2="275" y2="112" stroke="#F471B5" stroke-width="5" stroke-linecap="round"/>
+            <line x1="275" y1="150" x2="303" y2="166" stroke="#E8F1FF" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="275" cy="150" r="7" fill="#00E5FF"/>
+            <line x1="312" y1="188" x2="340" y2="216" stroke="#00E5FF" stroke-width="11" stroke-linecap="round"/>
+            <path d="M330 80 l6 14 14 6 -14 6 -6 14 -6 -14 -14 -6 14 -6 Z" fill="none" stroke="#A3E635" stroke-width="3" stroke-linejoin="round"/>
           </svg>
         </div>
         <div class="card-body">
@@ -577,24 +599,23 @@
       </a>
 
       <!-- Project 6: Excel Automation Tools (internal) -->
-      <a href="https://github.com/Niru22-web" target="_blank" rel="noopener" class="card coral reveal">
+      <a href="https://github.com/Niru22-web" target="_blank" rel="noopener" class="card c-violet reveal">
         <div class="card-thumb">
           <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-            <rect width="400" height="300" fill="#FF5E5B"/>
-            <rect x="80" y="50" width="240" height="200" rx="12" fill="#FFF6EC" stroke="#241E4E" stroke-width="5"/>
-            <rect x="80" y="50" width="240" height="36" rx="12" fill="#241E4E"/>
-            <rect x="80" y="70" width="240" height="16" fill="#241E4E"/>
-            <g stroke="#241E4E" stroke-width="3.5" stroke-linecap="round">
+            <rect width="400" height="300" fill="#130F26"/>
+            <rect x="80" y="50" width="240" height="200" rx="12" fill="#171233" stroke="#8B5CF6" stroke-width="4"/>
+            <line x1="80" y1="86" x2="320" y2="86" stroke="#8B5CF6" stroke-width="3"/>
+            <g stroke="#3A3466" stroke-width="3" stroke-linecap="round">
               <line x1="160" y1="50" x2="160" y2="250"/><line x1="240" y1="50" x2="240" y2="250"/>
               <line x1="80" y1="120" x2="320" y2="120"/><line x1="80" y1="185" x2="320" y2="185"/>
             </g>
-            <rect x="96" y="140" width="48" height="12" rx="6" fill="#3FC1C9"/>
-            <rect x="176" y="140" width="48" height="12" rx="6" fill="#FFC93C"/>
-            <rect x="256" y="140" width="48" height="12" rx="6" fill="#A78BFA"/>
-            <rect x="96" y="205" width="90" height="12" rx="6" fill="#FF8FAB"/>
-            <circle cx="310" cy="230" r="30" fill="#FFC93C" stroke="#241E4E" stroke-width="5"/>
-            <path d="M310 218 v12 M310 230 l9 6" fill="none" stroke="#241E4E" stroke-width="4" stroke-linecap="round"/>
-            <g stroke="#241E4E" stroke-width="4" stroke-linecap="round">
+            <rect x="96" y="140" width="48" height="11" rx="5" fill="none" stroke="#00E5FF" stroke-width="3"/>
+            <rect x="176" y="140" width="48" height="11" rx="5" fill="none" stroke="#A3E635" stroke-width="3"/>
+            <rect x="256" y="140" width="48" height="11" rx="5" fill="none" stroke="#F471B5" stroke-width="3"/>
+            <rect x="96" y="205" width="90" height="11" rx="5" fill="none" stroke="#8B5CF6" stroke-width="3"/>
+            <circle cx="310" cy="230" r="30" fill="none" stroke="#F471B5" stroke-width="4"/>
+            <path d="M310 218 v12 M310 230 l9 6" fill="none" stroke="#F471B5" stroke-width="4" stroke-linecap="round"/>
+            <g stroke="#F471B5" stroke-width="4" stroke-linecap="round">
               <line x1="310" y1="192" x2="310" y2="184"/><line x1="310" y1="276" x2="310" y2="268"/>
               <line x1="272" y1="234" x2="264" y2="234"/><line x1="356" y1="234" x2="348" y2="234"/>
             </g>
@@ -613,13 +634,13 @@
 <section class="about" id="about">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-tag">about me</span>
+      <span class="sec-tag">about_me</span>
       <h2>Nice to meet you!</h2>
     </div>
     <div class="about-grid">
       <div class="about-text reveal">
-        <p>I'm a <span class="hl-y">Data Analytics &amp; Automation Specialist</span> who believes the best work is the work you never have to do twice — I build the systems that make sure of it.</p>
-        <p>I create intelligent automation solutions, enterprise web portals, Excel tools, and dashboards that have saved <span class="hl-t">1,000+ hours of manual work</span> a year — and crunched 1M+ ledger records in under 3 minutes.</p>
+        <p>I'm a <span class="glow-c">Data Analytics &amp; Automation Specialist</span> who believes the best work is the work you never have to do twice — I build the systems that make sure of it.</p>
+        <p>I create intelligent automation solutions, enterprise web portals, Excel tools, and dashboards that have saved <span class="glow-v">1,000+ hours of manual work</span> a year — and crunched 1M+ ledger records in under 3 minutes.</p>
         <p>When I'm not automating, you'll find me building Power BI dashboards for executives, teaching Excel tricks it didn't know it could do, and chasing the perfect workflow.</p>
         <div class="skill-pills">
           <span class="pill">Python</span>
@@ -644,27 +665,35 @@
 <section id="services">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-tag">what I do</span>
+      <span class="sec-tag">what_i_do</span>
       <h2>How I can <em>help</em></h2>
     </div>
     <div class="services-grid">
       <div class="service reveal">
-        <div class="service-ico">🤖</div>
+        <div class="service-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
         <h3>Automation Solutions</h3>
         <p>Excel VBA, Power Query, and Power Automate tools that erase 1,000+ hours of manual work every year.</p>
       </div>
       <div class="service reveal">
-        <div class="service-ico">📊</div>
+        <div class="service-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
         <h3>Analytics &amp; BI</h3>
         <p>Executive Power BI dashboards with DAX metrics and SQL pipelines — real-time numbers for real decisions.</p>
       </div>
       <div class="service reveal">
-        <div class="service-ico">🧠</div>
+        <div class="service-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+        </div>
         <h3>AI Integration</h3>
         <p>OpenAI-powered assistants, document intelligence, and natural-language-to-SQL workflows that draft themselves.</p>
       </div>
       <div class="service reveal">
-        <div class="service-ico">🌐</div>
+        <div class="service-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
         <h3>Enterprise Web Apps</h3>
         <p>Full-stack React + Node portals for timesheets, assets, and workforce management — built to not flinch.</p>
       </div>
@@ -676,10 +705,10 @@
 <section class="contact" id="contact">
   <div class="wrap">
     <div class="contact-card reveal">
-      <span class="sec-tag" style="background:var(--pink)">got something repetitive?</span>
+      <span class="sec-tag">got_something_repetitive?</span>
       <h2>Let's automate<br><span class="c1">the boring</span> <span class="c2">stuff</span></h2>
       <p>Whether it's a million-row spreadsheet, a clunky workflow, or an idea for a full portal — I'd love to hear about it. My inbox is always open.</p>
-      <a href="mailto:niranjanmulam.dev@gmail.com" class="btn btn-primary">niranjanmulam.dev@gmail.com ✉</a>
+      <a href="mailto:niranjanmulam22@gmail.com" class="btn btn-primary">niranjanmulam22@gmail.com ✉</a>
     </div>
   </div>
 </section>
@@ -687,8 +716,8 @@
 <!-- ============ FOOTER ============ -->
 <footer>
   <div class="wrap foot-inner">
-    <div class="logo" style="color:var(--cream)">
-      <span class="mark" style="box-shadow:3px 3px 0 var(--yellow)">N!</span>
+    <div class="logo">
+      <span class="mark">N!</span>
       <span>niranjan.mulam</span>
     </div>
     <div class="foot-links">
@@ -712,9 +741,6 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
-
-</body>
-</html>
 
 </body>
 </html>
