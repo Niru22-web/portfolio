@@ -381,6 +381,43 @@
   .service h3{font-size:1.18rem;font-weight:600;margin-bottom:8px;}
   .service p{font-size:.95rem;color:var(--muted);}
 
+  /* ---------- Journey timeline ---------- */
+  .timeline{position:relative;max-width:720px;margin:0 auto;padding:8px 0;}
+  .timeline::before{
+    content:"";position:absolute;left:25px;top:8px;bottom:8px;width:2px;
+    background:var(--grad);opacity:.45;border-radius:2px;
+  }
+  .t-item{position:relative;padding-left:76px;margin-bottom:26px;}
+  .t-item:last-child{margin-bottom:0;}
+  .t-node{
+    position:absolute;left:16px;top:24px;width:20px;height:20px;border-radius:50%;
+    background:var(--grad);
+    box-shadow:0 0 0 5px rgba(167,139,250,.16), 0 0 18px rgba(139,92,246,.55);
+  }
+  .t-card{padding:22px 26px;}
+  .t-year{
+    display:inline-block;font-family:var(--font-display);font-weight:700;font-size:.82rem;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+    text-transform:uppercase;letter-spacing:.14em;margin-bottom:6px;
+  }
+  .t-card h3{font-size:1.15rem;font-weight:600;margin-bottom:6px;}
+  .t-card p{font-size:.95rem;color:var(--muted);}
+
+  /* ---------- Certifications ---------- */
+  .certs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:64px;}
+  .cert{display:flex;gap:18px;padding:26px;align-items:flex-start;}
+  .cert-ico{
+    flex:none;width:52px;height:52px;border-radius:16px;
+    background:var(--glass-strong);border:1px solid var(--glass-border);
+    display:grid;place-items:center;
+  }
+  .cert-ico svg{width:26px;height:26px;}
+  .cert:nth-child(1) .cert-ico svg{stroke:var(--violet);}
+  .cert:nth-child(2) .cert-ico svg{stroke:var(--blue);}
+  .cert-title{font-family:var(--font-display);font-weight:600;font-size:1.05rem;}
+  .cert-issuer{font-size:.8rem;color:var(--muted);margin:2px 0 8px;}
+  .cert p{font-size:.9rem;color:var(--muted);}
+
   /* ---------- Contact ---------- */
   .contact{text-align:center;position:relative;overflow:hidden;}
   .contact-card{
@@ -486,21 +523,21 @@
           <span class="h-top">Hi, I'm</span>
           <span class="grad-wrap"><span class="grad">Niranjan</span></span>
         </h1>
-        <p class="hero-sub">Data Analytics &amp; Automation Specialist. I build <span class="hl">intelligent automation</span>, enterprise apps, and dashboards that erase busywork — saving teams 1,000+ hours a year.</p>
+        <p class="hero-sub">Data Analytics &amp; Automation Specialist. I build <span class="hl">intelligent automation</span>, enterprise apps, and dashboards that erase busywork — one automation alone saved 20 hours in a single project.</p>
         <div class="hero-actions">
           <a href="#work" class="btn btn-primary">See my work ↓</a>
           <a href="#contact" class="btn btn-ghost">Say hello →</a>
         </div>
         <div class="hero-stats">
-          <div class="stat-chip"><div class="stat-num">15+</div><div class="stat-label">projects shipped</div></div>
-          <div class="stat-chip"><div class="stat-num">1M+</div><div class="stat-label">ledger records processed</div></div>
-          <div class="stat-chip"><div class="stat-num">1000+</div><div class="stat-label">hours automated yearly</div></div>
-          <div class="stat-chip"><div class="stat-num">90%</div><div class="stat-label">faster audit cycles</div></div>
+          <div class="stat-chip"><div class="stat-num">10+</div><div class="stat-label">projects shipped</div></div>
+          <div class="stat-chip"><div class="stat-num">20 hrs</div><div class="stat-label">automated in one project</div></div>
+          <div class="stat-chip"><div class="stat-num">1.5+</div><div class="stat-label">years experience</div></div>
+          <div class="stat-chip"><div class="stat-num">8+</div><div class="stat-label">technologies mastered</div></div>
         </div>
       </div>
       <div class="hero-art">
         <figure class="frame">
-          <img src="developer.png" alt="Illustration of Niranjan working at his desk" width="1024" height="1024">
+          <img src="character-new.png" alt="Illustration of Niranjan working at his desk" width="1024" height="1024">
           <figcaption>this is me, probably automating something</figcaption>
         </figure>
       </div>
@@ -713,6 +750,74 @@
   </div>
 </section>
 
+<!-- ============ JOURNEY ============ -->
+<section id="journey">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">the journey</span>
+      <h2>How I got <em>here</em></h2>
+    </div>
+
+    <div class="timeline">
+      <div class="t-item reveal">
+        <div class="t-node"></div>
+        <div class="t-card glass">
+          <span class="t-year">2025 · The spark</span>
+          <h3>Fell in love with automation</h3>
+          <p>Dove into Python, SQL, and Excel — and discovered my favorite thing: killing repetitive work with code.</p>
+        </div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-node"></div>
+        <div class="t-card glass">
+          <span class="t-year">2025 · First automation</span>
+          <h3>Built my first tool suite</h3>
+          <p>Created my first Excel + VBA automation suite — it erased 20 hours of manual work in a single project. I was hooked.</p>
+        </div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-node"></div>
+        <div class="t-card glass">
+          <span class="t-year">2026 · Going enterprise</span>
+          <h3>Shipped real systems</h3>
+          <p>Built and deployed production systems — the Timesheet Portal, NVK Data Entry, and client websites used by real teams.</p>
+        </div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-node"></div>
+        <div class="t-card glass">
+          <span class="t-year">Now · Data &amp; AI</span>
+          <h3>Analytics and intelligent workflows</h3>
+          <p>Building Power BI dashboards, crunching general ledgers, and wiring AI into everyday business workflows.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="certs">
+      <div class="cert glass reveal">
+        <div class="cert-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.4 7.2 16.9l.9-5.4L4.2 7.7l5.4-.8z"/></svg>
+        </div>
+        <div>
+          <div class="cert-title">Microsoft Excel Expert</div>
+          <div class="cert-issuer">Microsoft · Certified</div>
+          <p>Complex formulas, dynamic functions, data modeling, Power Query, Power Pivot, and automated spreadsheet design.</p>
+        </div>
+      </div>
+      <div class="cert glass reveal">
+        <div class="cert-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="18" x2="12" y2="21"/><path d="M8 12l2-2 2 2 4-4"/></svg>
+        </div>
+        <div>
+          <div class="cert-title">Microsoft Office Specialist</div>
+          <div class="cert-issuer">Microsoft · Certified</div>
+          <p>Advanced proficiency across Microsoft core desktop applications and enterprise workflows.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ ABOUT ============ -->
 <section class="about" id="about">
   <div class="wrap">
@@ -723,7 +828,7 @@
     <div class="about-grid">
       <div class="about-text reveal">
         <p>I'm a <span class="hl">Data Analytics &amp; Automation Specialist</span> who believes the best work is the work you never have to do twice — I build the systems that make sure of it.</p>
-        <p>I create intelligent automation solutions, enterprise web portals, Excel tools, and dashboards that have saved <span class="hl">1,000+ hours of manual work</span> a year — and crunched 1M+ ledger records in under 3 minutes.</p>
+        <p>I create intelligent automation solutions, enterprise web portals, Excel tools, and dashboards — including one automation that erased <span class="hl">20 hours of manual work</span> in a single project.</p>
         <p>When I'm not automating, you'll find me building Power BI dashboards for executives, teaching Excel tricks it didn't know it could do, and chasing the perfect workflow.</p>
         <div class="skill-pills">
           <span class="pill">Python</span>
@@ -757,7 +862,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </div>
         <h3>Automation Solutions</h3>
-        <p>Excel VBA, Power Query, and Power Automate tools that erase 1,000+ hours of manual work every year.</p>
+        <p>Excel VBA, Power Query, and Power Automate tools that erase hours of manual work — 20 hours saved in one project alone.</p>
       </div>
       <div class="service reveal">
         <div class="service-ico">
