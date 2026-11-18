@@ -9,12 +9,14 @@ Data Analytics & Automation Specialist. I build intelligent automation, enterpri
 ## What's inside
 
 - `index.html` — the entire site: HTML + CSS + JS in one file, with all artwork as inline SVG
+- `character-new.png` — hero illustration
 - `developer.png` — 3D character illustration used in the About section
 
 ## Tech
 
 - Zero dependencies, zero build step — a single static HTML file
-- Fonts: Bricolage Grotesque, DM Sans, Caveat (Google Fonts)
+- Design: dark premium theme with glass cards, scroll animations and a live project grid
+- Fonts: Space Grotesk, Inter, JetBrains Mono (Google Fonts)
 - Hosted on Vercel
 
 ## Deploy
